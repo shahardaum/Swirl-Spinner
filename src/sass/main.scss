@@ -1,0 +1,80 @@
+@import "reset";
+@import "base";
+@import "mixins";
+@import "constants";
+@import "./spinners/circle";
+
+body {
+  @include flex-container(center, center, column);
+
+  background-color: $body-bg-color;
+  // user-select: none;
+  perspective: 500px;
+
+  .header {
+    margin-bottom: 50px;
+    // margin-top: 100px;
+    cursor: pointer;
+    color: lighten($header-color, 10%);
+    text-shadow: 0px 0px 5px $header-shadow-color;
+    transform-style: preserve-3d;
+    transform-origin: 50% 60%;
+    transition: text-shadow 300ms, color 300ms, transform 300ms ease-out;
+    &:hover {
+      text-shadow: 0px 0px 15px $header-shadow-color-hover;
+      color: $wrapper-border-color;
+      transform: perspective(500px) rotateX(-45deg);
+    }
+  }
+  .wrapper {
+    box-shadow: 0px 0px 15px $header-shadow-color-hover; // $wrapper-shadow;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 400px;
+    height: 400px;
+    padding: 1px;
+    border: 15px solid $wrapper-border-color;
+    background: $wrapper-bg-color;
+    transition: transform 300ms cubic-bezier(0, 0, 0.4, 0.9);
+
+    &:hover {
+      transform: rotateX(-25deg);
+    }
+
+    @include flex-container(center, center);
+    flex-wrap: wrap;
+    // align-content: flex-start;
+
+    .spinner {
+      width: 33.333%;
+      height: 33.333%;
+      border: darken($wrapper-bg-color, 10%) dashed 1px;
+      @include flex-container();
+      position: relative;
+      &::after {
+        content: "";
+
+        width: 2px;
+        height: 25px;
+        background-color: red;
+
+        position: absolute;
+        margin-left: -2px;
+        left: 50%;
+        top: 50%;
+        transform-origin: top;
+
+        animation: rotate 1s infinite;
+      }
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

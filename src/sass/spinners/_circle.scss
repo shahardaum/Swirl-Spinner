@@ -1,0 +1,20 @@
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: relative;
+  // margin: 25px;
+  background: none;
+  border: 3px solid #ff0dff;
+  box-shadow: $spinner-shadow;
+
+  &::after {
+    content: "";
+    width: 2px;
+    height: 32px;
+    background: orangered;
+  }
+}
+
+@keyframes spin {
+}
